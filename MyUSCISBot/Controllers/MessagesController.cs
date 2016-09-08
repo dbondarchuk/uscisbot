@@ -25,9 +25,11 @@ namespace MyUSCISBot
         {
             if (activity.Type.ToLowerInvariant() == ActivityTypes.Message.ToLowerInvariant())
             {
-                ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                
-                await Conversation.SendAsync(activity, MakeRoot);
+                //ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
+
+                //await Conversation.SendAsync(activity, MakeRoot);
+                await Conversation.SendAsync(activity, () => new CaseStatusDialog());
+
                 /*
                 // calculate something for us to return
                 int length = (activity.Text ?? string.Empty).Length;
@@ -40,8 +42,7 @@ namespace MyUSCISBot
             {
                 HandleSystemMessage(activity);
             }
-            var response = Request.CreateResponse(HttpStatusCode.OK);
-            return response;
+            return new HttpResponseMessage(System.Net.HttpStatusCode.Accepted);
         }
 
         internal static IDialog<VisaStatusRequest> MakeRoot()

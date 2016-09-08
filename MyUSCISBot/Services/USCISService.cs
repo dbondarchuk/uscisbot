@@ -15,14 +15,14 @@ namespace MyUSCISBot.Services
         private const string UscisCheckUrl = "https://egov.uscis.gov/casestatus/mycasestatus.do";
         private const string Pattern = "<div class=\"current-status-sec\">((.|\\n)*?)<\\/div>";
 
-        public static bool GetCaseStatus(VisaStatusRequest request, out string text)
+        public static bool GetCaseStatus(string caseNumber, out string text)
         {
             try
             {
                 var webClient = new WebClient();
                 var collection = new NameValueCollection
                 {
-                    {"appReceiptNum", request.CaseNumber},
+                    {"appReceiptNum", caseNumber},
                     {"initCaseSearch", "CHECK STATUS"}
                 };
 

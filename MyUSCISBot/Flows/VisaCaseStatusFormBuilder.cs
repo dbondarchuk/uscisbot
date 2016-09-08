@@ -43,7 +43,7 @@ namespace MyUSCISBot.Flows
                 .OnCompletion((context, state) =>
                 {
                     string status;
-                    var result = UscisService.GetCaseStatus(state, out status);
+                    var result = UscisService.GetCaseStatus(state.CaseNumber, out status);
                     if (result)
                     {
                         return context.PostAsync($"Your case status: {status}");
